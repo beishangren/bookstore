@@ -6,8 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import bookstore.domain.Book;
 import bookstore.domain.GoodsProcess;
+import bookstore.domain.Users;
 import bookstore.entity.BookEntity;
 import bookstore.entity.GoodsProcessEntity;
+import bookstore.entity.UsersEntity;
 import bookstore.repositories.BookRepository;
 import bookstore.repositories.GoodsProcessRepository;
 import bookstore.service.BookService;
@@ -36,6 +38,12 @@ public class GoodsProcessServicelmpl implements GoodsProcessService{
 	
 //	@Override
 //    @Transactional
+//	public Users findByName(String name) {
+//		UsersEntity usersEntity=goodsProcessRepository.findByUserName(name);
+//		return buildUsers(usersEntity);
+//	}
+//	@Override
+//    @Transactional
 //	public List<Book> find() {
 //		 List<Book> list = new ArrayList<>();
 //		 
@@ -47,16 +55,14 @@ public class GoodsProcessServicelmpl implements GoodsProcessService{
 //		
 //	}
 //	
-//	public Book buildBook(BookEntity bookEntity) {
+//	public Users buildUsers(UsersEntity usersEntity) {
 //
-//		Book book=new Book(
-//				bookEntity.getId(),
-//				bookEntity.getName(),
-//				bookEntity.getPrice(),
-//				bookEntity.getImage(),
-//				bookEntity.getNumber()
+//		Users users=new Users(
+//				usersEntity.getId(),
+//				usersEntity.getUserName(),
+//				usersEntity.getPassWord()
 //				);
 //		
-//		return book;
+//		return users;
 //	}
 }

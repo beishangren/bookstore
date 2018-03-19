@@ -1,4 +1,4 @@
-/*package bookstore.serviceImpl;
+package bookstore.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,21 +22,14 @@ public class UsersServiceImpl implements UsersService{
 		usersRepository.save(usersEntity1);
 	}
 	
+
 	@Override
 	@Transactional
-	public Users findByNameAndPassWord(String name,String password) {
-		UsersEntity userEntity=new UsersEntity();
-		userEntity=usersRepository.findByUserNameAndPassWord(name,password);
-		return userEntity==null ?null:buildUsers(userEntity);
-	}
-	
-	@Override
-	@Transactional
-	public Users findOneByUserName(String name) {
+	public Users findByUserName(String name) {
 		System.out.println("+++++++++++++++"+name);
 		UsersEntity userEntity=new UsersEntity();
-		userEntity=usersRepository.findOneByUserName(name);
-		return userEntity==null ?null:buildUsers(userEntity);
+		userEntity=usersRepository.findByUserName(name);
+		return buildUsers(userEntity);
 	}
 	
 	public Users buildUsers(UsersEntity usersEntity) {
@@ -48,4 +41,4 @@ public class UsersServiceImpl implements UsersService{
 	}
 	
 }
-*/
+

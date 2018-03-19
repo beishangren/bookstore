@@ -74,7 +74,7 @@
 	<script>
 	$(document).ready(function () {
 		$.ajax('index/findAll',{
-			 type:'POST', 
+			type:'POST', 
 			data:{}, 
 			contentType:'application/json',
 			dataType:'json',
@@ -106,7 +106,18 @@
 		});
 	});
 	function buyOrAdd(data){
-		alert("id是"+data.id+"类型是"+$(data).val())
+		alert("id是"+data.id+"类型是"+$(data).val());
+		$.ajax('shop/cart',{
+			type:'POST', 
+			data:{}, 
+			contentType:'application/json',
+			dataType:'json',
+			success:function(data,XMLHttpRequest,jqXHR){
+			
+			},error:function(XMLHttpRequest,jqXHR){
+				alert("erro");
+			}
+		});
 	}
 	</script>
 </body>
