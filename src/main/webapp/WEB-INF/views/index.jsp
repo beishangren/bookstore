@@ -88,8 +88,8 @@
 					div2=$("<div></div>").addClass("caption"),
 					h3=$("<h3>价格:"+item.price+"</h3>"),
 					p=$("<p></p>"),
-					p1=$("<p id="+item.id+" value=buy onClick=buyOrAdd(this)>购买</p>").addClass("btn btn-primary"),
-					p2=$("<p id="+item.id+" value=add onClick=buyOrAdd(this)>加入购物车</p>").addClass("btn btn-default");
+					p1=$("<button id="+item.id+" value=buy onClick=buyOrAdd(this)>购买</button>").addClass("btn btn-primary"),
+					p2=$("<button id="+item.id+" value=add onClick=buyOrAdd(this)>加入购物车</button>").addClass("btn btn-default");
 					div0.append(div1);
 					div1.append(img);
 					div1.append(div2);
