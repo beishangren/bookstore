@@ -7,4 +7,6 @@ public interface BookService {
 	void create(Book book);
 
 	List<Book> find();
+
+	Book findOne(Long id);
 }

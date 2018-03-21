@@ -107,7 +107,7 @@
 	});
 	function buyOrAdd(data){
 		alert("id是"+data.id+"类型是"+$(data).val());
-		$.ajax('shop/cart',{
+		$.ajax('shop/cart?id='+data.id,{
 			type:'POST', 
 			data:{}, 
 			contentType:'application/json',
@@ -115,7 +115,7 @@
 			success:function(data,XMLHttpRequest,jqXHR){
 			
 			},error:function(XMLHttpRequest,jqXHR){
-				alert("erro");
+				/* alert("erro"); */
 			}
 		});
 	}

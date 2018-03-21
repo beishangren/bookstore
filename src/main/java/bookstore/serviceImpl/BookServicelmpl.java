@@ -35,13 +35,19 @@ public class BookServicelmpl implements BookService{
     @Transactional
 	public List<Book> find() {
 		 List<Book> list = new ArrayList<>();
-		 
-
 		 bookRepository.findAll().forEach(bookEntity->{
 			 list.add(buildBook(bookEntity));
 		 });
 		 return list;
 		
+	}
+	
+	@Override
+    @Transactional
+	public Book findOne(Long id) {
+		 BookEntity bookEntity = new BookEntity();
+		 bookEntity=bookRepository.findOne(id);
+		 return buildBook(bookEntity);	
 	}
 	
 	public Book buildBook(BookEntity bookEntity) {
