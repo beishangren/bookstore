@@ -7,6 +7,8 @@
 <title>小马的书店</title>
 <link href="node_modules/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="//cdn.bootcss.com/weui/0.4.3/style/weui.min.css">
+<link rel="stylesheet" href="node_modules/jquery-weui/dist/css/jquery-weui.min.css">
 
 </head>
 <body>
@@ -71,6 +73,8 @@
 </div>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- <script src="node_modules/jquery-weui/dist/js/jquery.min.js"></script> -->
+	<script src="node_modules/jquery-weui/dist/js/jquery-weui.min.js"></script>
 	<script>
 	$(document).ready(function () {
 		$.ajax('index/findAll',{
@@ -89,7 +93,7 @@
 					h3=$("<h3>价格:"+item.price+"</h3>"),
 					p=$("<p></p>"),
 					p1=$("<button id="+item.id+" value=buy onClick=buyOrAdd(this)>购买</button>").addClass("btn btn-primary"),
-					p2=$("<button id="+item.id+" value=add onClick=buyOrAdd(this)>加入购物车</button>").addClass("btn btn-default");
+					p2=$("<button id="+item.id+" value=cart onClick=buyOrAdd(this)>加入购物车</button>").addClass("btn btn-default");
 					div0.append(div1);
 					div1.append(img);
 					div1.append(div2);
@@ -106,7 +110,19 @@
 		});
 	});
 	function buyOrAdd(data){
-		alert("id是"+data.id+"类型是"+$(data).val());
+		/* if($(data).val()=="buy")
+		{
+			$.modal({
+				  title: "Hello",
+				  text: "我是自定义的modal",
+				  buttons: [
+				    { text: "支付宝", onClick: function(){ console.log(1)} },
+				    { text: "微信支付", onClick: function(){ console.log(2)} },
+				    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+				  ]
+				});
+		} */
+		/* alert("id是"+data.id+"类型是"+$(data).val()); */
 		$.ajax('shop/cart?id='+data.id,{
 			type:'POST', 
 			data:{}, 

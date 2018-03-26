@@ -11,28 +11,21 @@ import bookstore.entity.AbstractEntity;
 public class GoodsProcessEntity extends AbstractEntity 
 {	
 	
-	private Integer userId;
-	private Integer goodsId;
-	private String state;
-	public Integer getUserId() {
+	private long userId;
+	private long goodsId;
+	
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public Integer getGoodsId() {
+	public long getGoodsId() {
 		return goodsId;
 	}
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(long goodsId) {
 		this.goodsId = goodsId;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	
 	
 	
 }

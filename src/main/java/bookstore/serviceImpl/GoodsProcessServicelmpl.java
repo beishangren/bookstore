@@ -25,6 +25,9 @@ public class GoodsProcessServicelmpl implements GoodsProcessService{
 	@Autowired
 	private GoodsProcessRepository goodsProcessRepository;
 	
+	@Autowired
+	private BookRepository bookRepository;
+	
 	
 	@Override
     @Transactional
@@ -32,10 +35,47 @@ public class GoodsProcessServicelmpl implements GoodsProcessService{
 		GoodsProcessEntity goodsProcessEntity=new GoodsProcessEntity();
 		goodsProcessEntity.setUserId(goodsProcess.getUserId());
 		goodsProcessEntity.setGoodsId(goodsProcess.getGoodsId());
-		goodsProcessEntity.setState(goodsProcess.getState());
 		goodsProcessRepository.save(goodsProcessEntity);
 	}
 	
+	@Override
+    @Transactional
+	public List<Book> findCart(long id) {
+		 List<GoodsProcess> list = new ArrayList<>();
+		 List<Book> bookList = new ArrayList<>();
+		 goodsProcessRepository.findByUserId(id).forEach(goodsProcessEntity->{
+			 list.add(buildGoodsProcess(goodsProcessEntity));
+		 });
+		 for(int i=0;i<list.size();i++) {
+				 bookList.add(buildBook(bookRepository.findOne(list.get(i).getGoodsId())));
+			 
+		 }
+		 return bookList;
+		
+	}
+	public GoodsProcess buildGoodsProcess(GoodsProcessEntity goodsProcessEntity) {
+
+		GoodsProcess goodsProcess=new GoodsProcess(
+				goodsProcessEntity.getId(),
+				goodsProcessEntity.getUserId(),
+				goodsProcessEntity.getGoodsId()
+				);
+		
+		return goodsProcess;
+	}
+	
+	public Book buildBook(BookEntity bookEntity) {
+
+		Book book=new Book(
+				bookEntity.getId(),
+				bookEntity.getName(),
+				bookEntity.getPrice(),
+				bookEntity.getImage(),
+				bookEntity.getNumber()
+				);
+		
+		return book;
+	}
 //	@Override
 //    @Transactional
 //	public Users findByName(String name) {

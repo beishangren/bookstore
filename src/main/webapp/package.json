@@ -6,7 +6,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootstrap-fileinput": "^4.4.7",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "jquery-weui": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {
