@@ -9,5 +9,7 @@ import java.util.List;
 public interface GoodsProcessService {
 	void create(GoodsProcess goodsProcess);
 
+	List<Book> findCart(long id);
+
 //	Users findByName(String name);
 }

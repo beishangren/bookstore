@@ -10,36 +10,6 @@
 
 </head>
 <body>
-	<!-- <nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">管理端</a>
-    </div>
-    <div>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target=".bs-example-modal-sm">查看书店基本信息</button>
-        </form>
-        <button type="button" class="btn btn-default navbar-btn">
-            导航栏按钮
-        </button>
-    </div>
-	</div>
-</nav>
-	
-
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-			收益:<input value="100000"/><br />
-			书本数量:<input value="10000"/>
-			</div>
-		</div>
-	</div> -->
 <ul id="myTab" class="nav nav-tabs">
 	<li class="active">
 		<a href="#order" data-toggle="tab">
@@ -68,29 +38,12 @@
 				<tr>
 					<th>商品名称</th>
 					<th>价格</th>
-					<th>订单编号</th>
 					<th>状态</th>
+					<th>操作</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<th>信息论编码</th>
-					<th>56￥</th>
-					<th>165462135465613</th>
-					<th>已发货</th>
-				</tr>
-				<tr>
-					<th>数学分析(上下)</th>
-					<th>126￥</th>
-					<th>798462135465613</th>
-					<th>待发货</th>
-				</tr>
-				<tr>
-					<th>空间解析几何</th>
-					<th>78￥</th>
-					<th>556221354689613</th>
-					<th>已签收</th>
-				</tr>
+			<tbody id="orderList">
+				
 			</tbody>
 		</table>
 	</div>
@@ -122,12 +75,35 @@
 	<script src="<c:url value='/node_modules/bootstrap-fileinput/js/fileinput.min.js'/>"></script>
 	
 	<script type="text/javascript">
+	$(document).ready(function () {
+ 		$.ajax('order/findOrder',{
+			type:'POST', 
+			data:{}, 
+			contentType:'application/json',
+			dataType:'json',
+			success:function(data,XMLHttpRequest,jqXHR){
+				console.log(data);
+				$.each(data,function(index,item)
+				{
+					var tr=$("<tr></tr>"),
+					th1=$("<th>"+item.bookName+"</th>"),
+					th2=$("<th>"+item.price+"￥</th>"),
+					th3=$("<th>"+item.state+"</th>"),
+					th4=$("<th><button id="+item.id+" onClick=delivery(this)>发货</button></th>")
+					tr.append(th1);
+					tr.append(th2);
+					tr.append(th3);
+					tr.append(th4);
+					$("#orderList").append(tr);
+				});
+				
+			},error:function(XMLHttpRequest,jqXHR){
+				alert("erro");
+			}
+		});
+	});
 	$('.myfile').fileinput('destroy');
     $(".myfile").fileinput({
-       //上传的地址
-       /* uploadUrl:"/zfm-fileupload/rest/document", */
-       /* uploadAsync : true, //默认异步上传 */
-       /* showUpload : true, //是否显示上传按钮,跟随文本框的那个 */
        showCaption : true,//是否显示标题,就是那个文本框
        showPreview : true, //是否显示预览,不写默认为true
        dropZoneEnabled : false,//是否显示拖拽区域，默认不写为true，但是会占用很大区域
@@ -141,31 +117,7 @@
        allowedPreviewMimeTypes : [ 'jpg', 'png', 'gif' ],//控制被预览的所有mime类型
        language : 'zh'
    }) 
-/*    //异步上传返回结果处理
-   $('.myfile').on('fileerror', function(event, data, msg) {
-       console.log("fileerror");
-       console.log(data);
-   });
-   //异步上传返回结果处理(返回上传地址)
-   $(".myfile").on("fileuploaded", function(event, data, previewId, index) {
-       console.log("fileuploaded",data.response);
-       var ref = $(this).attr("data-ref");
-       $("input[name='" + ref + "']").val(data.response.url);
 
-   });
-
-   //同步上传错误处理
-   $('.myfile').on('filebatchuploaderror', function(event, data, msg) {
-       console.log("filebatchuploaderror");
-       console.log(data);
-   });
-
-   //同步上传返回结果处理
-   $(".myfile").on("filebatchuploadsuccess",
-           function(event, data, previewId, index) {
-               console.log("filebatchuploadsuccess");
-               console.log(data);
-           }); */
 
    //上传前
    $('.myfile').on('filepreupload', function(event, data, previewId, index) {
@@ -236,6 +188,20 @@ $("#submit").click(function(){
 		}
 	});
 })
+function delivery(data){
+		alert("id是"+data.id);
+ 		$.ajax('order/change?id='+data.id,{
+			type:'POST', 
+			data:{}, 
+			contentType:'application/json',
+			dataType:'json',
+			success:function(data,XMLHttpRequest,jqXHR){
+			
+			},error:function(XMLHttpRequest,jqXHR){
+			
+			}
+		}); 
+	}
 	</script>
 </body>
 </html>

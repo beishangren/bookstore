@@ -9,5 +9,7 @@ import bookstore.entity.BookEntity;
 //@Repository
 public interface BookRepository extends PagingAndSortingRepository<BookEntity, Long>, JpaSpecificationExecutor {
 
+//	BookEntity find(long goodsId);
+
 
 }
