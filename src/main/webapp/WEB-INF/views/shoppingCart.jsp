@@ -10,36 +10,6 @@
 
 </head>
 <body>
-	<!-- <nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">管理端</a>
-    </div>
-    <div>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target=".bs-example-modal-sm">查看书店基本信息</button>
-        </form>
-        <button type="button" class="btn btn-default navbar-btn">
-            导航栏按钮
-        </button>
-    </div>
-	</div>
-</nav>
-	
-
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-			收益:<input value="100000"/><br />
-			书本数量:<input value="10000"/>
-			</div>
-		</div>
-	</div> -->
 <ul id="myTab" class="nav nav-tabs">
 	<li class="active">
 		<a href="#order" data-toggle="tab">
@@ -170,7 +140,7 @@
 	
 	function buy(data){
 		alert("id是"+data.id);
- 		/* $.ajax('order/buy?id='+data.id,{
+ 		 $.ajax('order/buy?id='+data.id,{
 			type:'POST', 
 			data:{}, 
 			contentType:'application/json',
@@ -180,7 +150,7 @@
 			},error:function(XMLHttpRequest,jqXHR){
 			
 			}
-		});  */
+		});  
 	}
 	</script>
 </body>

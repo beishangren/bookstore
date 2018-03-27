@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>小马的书店</title>
-<link href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="//cdn.bootcss.com/weui/0.4.3/style/weui.min.css">
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css"  rel="stylesheet">
+<link rel="stylesheet" href="node_modules/jquery-weui/dist/lib/weui.min.css">
+
 <link rel="stylesheet" href="node_modules/jquery-weui/dist/css/jquery-weui.min.css">
 
 </head>
@@ -110,30 +110,46 @@
 		});
 	});
 	function buyOrAdd(data){
-		/* if($(data).val()=="buy")
+		 if($(data).val()=="buy")
 		{
 			$.modal({
-				  title: "Hello",
-				  text: "我是自定义的modal",
+				  title: "付款",
+				  text: "qing'xua",
 				  buttons: [
-				    { text: "支付宝", onClick: function(){ console.log(1)} },
-				    { text: "微信支付", onClick: function(){ console.log(2)} },
-				    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+				    { text: "支付宝", onClick: function(){buy()} },
+				    { text: "微信支付", onClick: function(){ buy()} },
+				    { text: "取消", className: "default", onClick: function(){buy()} },
 				  ]
 				});
-		} */
-		/* alert("id是"+data.id+"类型是"+$(data).val()); */
-		$.ajax('shop/cart?id='+data.id,{
-			type:'POST', 
-			data:{}, 
-			contentType:'application/json',
-			dataType:'json',
-			success:function(data,XMLHttpRequest,jqXHR){
 			
-			},error:function(XMLHttpRequest,jqXHR){
-				/* alert("erro"); */
+			function buy(){
+				alert("id是"+data.id);
+		 		 $.ajax('order/buy?id='+data.id,{
+					type:'POST', 
+					data:{}, 
+					contentType:'application/json',
+					dataType:'json',
+					success:function(data,XMLHttpRequest,jqXHR){
+					
+					},error:function(XMLHttpRequest,jqXHR){
+					
+					}
+				});  
 			}
-		});
+		} else{/* alert("id是"+data.id+"类型是"+$(data).val()); */
+			$.ajax('shop/cart?id='+data.id,{
+				type:'POST', 
+				data:{}, 
+				contentType:'application/json',
+				dataType:'json',
+				success:function(data,XMLHttpRequest,jqXHR){
+				
+				},error:function(XMLHttpRequest,jqXHR){
+					/* alert("erro"); */
+				}
+			});
+		}
+		
 	}
 	</script>
 </body>
