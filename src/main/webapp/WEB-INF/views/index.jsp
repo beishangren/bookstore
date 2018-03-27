@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>小马的书店</title>
-<link href="node_modules/bootstrap/dist/css/bootstrap.min.css"  rel="stylesheet">
-<link rel="stylesheet" href="node_modules/jquery-weui/dist/lib/weui.min.css">
-
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="//cdn.bootcss.com/weui/0.4.3/style/weui.min.css">
 <link rel="stylesheet" href="node_modules/jquery-weui/dist/css/jquery-weui.min.css">
 
 </head>

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface OrderService {
 
+<<<<<<< HEAD
 	void save(Order order);
 
 	List<Order> find(); 
@@ -14,5 +15,8 @@ public interface OrderService {
 	Order findOne(long id);
 
 	void update(long id);
+=======
+	void buy(Order order);
+>>>>>>> branch 'master' of https://github.com/beishangren/bookstore.git
 
 }
