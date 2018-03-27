@@ -26,7 +26,6 @@ public class OrderServicelmpl implements OrderService{
 	
 	@Override
     @Transactional
-<<<<<<< HEAD
 	public void save(Order order) {
 		OrderEntity orderEntity=new OrderEntity();
 		orderEntity.setName(order.getName());
@@ -74,16 +73,6 @@ public class OrderServicelmpl implements OrderService{
 				);
 		return order;
 	}
-=======
-	public void buy(Order order) {
-		OrderEntity orderEntity=new OrderEntity();
-		orderEntity.setName(order.getName());
-		orderEntity.setBookName(order.getBookName());
-		orderEntity.setPrice(order.getPrice());
-		orderEntity.setState(order.getState());
-		orderRepository.save(orderEntity);
-	}
-	
->>>>>>> branch 'master' of https://github.com/beishangren/bookstore.git
+
 	
 }

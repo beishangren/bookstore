@@ -51,7 +51,6 @@ public class OrderController {
 			order.setBookName(book.getName());
 			order.setPrice(book.getPrice());
 			order.setState("buy");
-<<<<<<< HEAD
 		orderService.save(order);		
 	}
   
@@ -66,10 +65,6 @@ public class OrderController {
   @RequestMapping(value="/change",method=POST)
 	public void change(HttpServletRequest request,@RequestParam("id") long id) {
 	  	orderService.update(id);		
-=======
-		orderService.buy(order);
-			
-			
->>>>>>> branch 'master' of https://github.com/beishangren/bookstore.git
+
 	}
 }
