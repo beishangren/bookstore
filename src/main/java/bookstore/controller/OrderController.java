@@ -41,7 +41,7 @@ public class OrderController {
   
   @ResponseBody
   @RequestMapping(value="/buy",method=POST)
-	public void buy(HttpServletRequest request,@RequestParam("id") long id) {
+	public String buy(HttpServletRequest request,@RequestParam("id") long id) {
 	  Object sec =request.getSession(false).getAttribute("SPRING_SECURITY_CONTEXT");
 	  SecurityContext sc = (SecurityContext) sec;
 		Users user=usersService.findByUserName(sc.getAuthentication().getName());
@@ -51,13 +51,18 @@ public class OrderController {
 			order.setBookName(book.getName());
 			order.setPrice(book.getPrice());
 			order.setState("buy");
-		orderService.save(order);		
+			order.setUserId(user.getId());;
+		orderService.save(order);	
+		return "success!";
 	}
   
   @ResponseBody
   @RequestMapping(value="/findOrder",method=POST)
-	public List<Order> findBook() {
-	  	List<Order> order=orderService.find();
+	public List<Order> findBook(HttpServletRequest request) {
+	  Object sec =request.getSession(false).getAttribute("SPRING_SECURITY_CONTEXT");
+	  SecurityContext sc = (SecurityContext) sec;
+		Users user=usersService.findByUserName(sc.getAuthentication().getName());
+	  	List<Order> order=orderService.find(user.getId());
 		return order;
 	}
   

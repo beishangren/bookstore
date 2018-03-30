@@ -9,12 +9,13 @@ public class Order extends DomainObject{
 	public Order() {
 		
 	}
-	public Order(Long id,String name,String bookName,Integer price,String state) {
+	public Order(Long id,String name,String bookName,Integer price,String state,long userId) {
 		super(id);
 		this.name = name;
 		this.bookName=bookName;
 		this.price=price;
 		this.state=state;
+		this.userId=userId;
 		}
 	
 	//书名
@@ -26,7 +27,8 @@ public class Order extends DomainObject{
 	//图片
 	
 	private String state;
-
+	
+	private long userId;
 	public String getName() {
 		return name;
 	}
@@ -50,6 +52,12 @@ public class Order extends DomainObject{
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	
 	

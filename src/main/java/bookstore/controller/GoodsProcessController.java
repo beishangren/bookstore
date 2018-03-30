@@ -36,7 +36,7 @@ public class GoodsProcessController {
   
   @ResponseBody
   @RequestMapping(value="/cart",method=POST)
-	public void addGoods(HttpServletRequest request,@RequestParam("id") int id) {
+	public String addGoods(HttpServletRequest request,@RequestParam("id") int id) {
 	  Object sec =request.getSession(false).getAttribute("SPRING_SECURITY_CONTEXT");
 	  SecurityContext sc = (SecurityContext) sec;
 	  Users user=usersService.findByUserName(sc.getAuthentication().getName());
@@ -44,18 +44,20 @@ public class GoodsProcessController {
 		goodsProcess.setUserId((int)user.getId());
 		goodsProcess.setGoodsId(id);
 		goodsProcessService.create(goodsProcess);
+		System.out.println("已添加到购物车");
 //	  if(state.equals("add"))
 //	  {
 //		  System.out.println("+++++++++======+++++++++++"+state);
 //	  }
-		if(null != sec)
-		{
-			
-			System.out.println("++++++++++++++++++++++++++"+sc.getAuthentication().getName());
-		}
-		
-		System.out.println("------------------"+user.getId()+"+++++++"+user.getPassWord());
-		System.out.println("+++++++++++++++++++"+id);
+//		if(null != sec)
+//		{
+//			
+//			System.out.println("++++++++++++++++++++++++++"+sc.getAuthentication().getName());
+//		}
+//		
+//		System.out.println("------------------"+user.getId()+"+++++++"+user.getPassWord());
+//		System.out.println("+++++++++++++++++++"+id);
+		return "success";
 		
 	}
   

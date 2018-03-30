@@ -18,6 +18,8 @@ public class OrderEntity extends AbstractEntity
 	private Integer price;
 	
 	private String state;
+	
+	private long userId;
 
 	public String getName() {
 		return name;
@@ -49,6 +51,14 @@ public class OrderEntity extends AbstractEntity
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	
 }

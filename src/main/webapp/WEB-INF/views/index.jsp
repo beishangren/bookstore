@@ -49,27 +49,7 @@
 	
 <div class="row">
 	<div id="goods" style="top:6rem;position:relative">
-		<!-- <div class="col-sm-6 col-md-3">
-         <div class="thumbnail">
-            <img src="/wp-content/uploads/2014/06/kittens.jpg" 
-             alt="通用的占位符缩略图">
-            <div class="caption">
-                <h3>缩略图标签</h3>
-                <p>一些示例文本。一些示例文本。</p>
-                <p>
-                    <a href="#" class="btn btn-primary" role="button">
-                        按钮
-                    </a> 
-                    <a href="#" class="btn btn-default" role="button">
-                        按钮
-                    </a>
-                </p>
-            </div>
-         </div> 
-    	</div> -->
 	</div>
-    
-
 </div>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -83,7 +63,6 @@
 			contentType:'application/json',
 			dataType:'json',
 			success:function(data,XMLHttpRequest,jqXHR){
-				console.log(data[0]);
 				$.each(data,function(index,item)
 				{
 					var div0=$("<div></div>").addClass("col-sm-6 col-md-3"),
@@ -110,9 +89,12 @@
 		});
 	});
 	function buyOrAdd(data){
-		 if($(data).val()=="buy")
+		/* console.log(data.value); */
+		/* alert(data.value); */
+		 if(data.value=="buy")
 		{
-			$.modal({
+			/*  alert("执行购买操作"); */
+			/* $.modal({
 				  title: "付款",
 				  text: "qing'xua",
 				  buttons: [
@@ -120,9 +102,8 @@
 				    { text: "微信支付", onClick: function(){ buy()} },
 				    { text: "取消", className: "default", onClick: function(){buy()} },
 				  ]
-				});
-			
-			function buy(){
+				}); 
+			function buy(){ */
 				alert("id是"+data.id);
 		 		 $.ajax('order/buy?id='+data.id,{
 					type:'POST', 
@@ -130,12 +111,12 @@
 					contentType:'application/json',
 					dataType:'json',
 					success:function(data,XMLHttpRequest,jqXHR){
-					
+						alert("购买成功");
 					},error:function(XMLHttpRequest,jqXHR){
-					
+						alert("购买错误");
 					}
 				});  
-			}
+			/* } */
 		} else{/* alert("id是"+data.id+"类型是"+$(data).val()); */
 			$.ajax('shop/cart?id='+data.id,{
 				type:'POST', 
@@ -143,9 +124,9 @@
 				contentType:'application/json',
 				dataType:'json',
 				success:function(data,XMLHttpRequest,jqXHR){
-				
+					
 				},error:function(XMLHttpRequest,jqXHR){
-					/* alert("erro"); */
+					alert("已添加至购物车！");
 				}
 			});
 		}

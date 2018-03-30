@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>登陆</h1>
-	<form action="">
-		<input /> <input />
-		<button>提交</button>
-	</form>
-
-
 	<h1>注册</h1>
 	用户名：
 	<input id="username" />
@@ -23,29 +16,27 @@
 	<button type="button" id="register">提交</button>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-		$("#register").click(function(){
-			var name=$("#username").val();
-			
-			data1={
-    				userName:$("#username").val(),
-            		passWord:$("#password").val(),	
-    		};
+		$("#register").click(function() {
+			var name = $("#username").val();
+
+			data1 = {
+				userName : $("#username").val(),
+				passWord : $("#password").val(),
+			};
 			console.log(data1);
-			 $.ajax('user/create', {
-		    type: 'POST',
-		    data: JSON.stringify(data1),
-		    contentType: 'application/json',
-		    dataType: 'json',
-		    success: function (data, XMLHttpRequest, jqXHR) {
-		        alert("成功");
-		    }, error: function (XMLHttpRequest, jqXHR) {
-		    	/* var dom = XMLHttpRequest.responseText;
-		        var msg = $(dom).text();
-		        alert(msg); */
-		alert("失败");
-		}
+			$.ajax('user/create', {
+				type : 'POST',
+				data : JSON.stringify(data1),
+				contentType : 'application/json',
+				dataType : 'json',
+				success : function(data, XMLHttpRequest, jqXHR) {
+					alert("成功");
+				},
+				error : function(XMLHttpRequest, jqXHR) {
+					alert("失败");
+				}
+			});
 		});
-		}); 
 	</script>
 </body>
 

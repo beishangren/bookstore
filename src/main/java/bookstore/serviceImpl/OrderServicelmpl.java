@@ -32,14 +32,15 @@ public class OrderServicelmpl implements OrderService{
 		orderEntity.setBookName(order.getBookName());
 		orderEntity.setPrice(order.getPrice());
 		orderEntity.setState(order.getState());
+		orderEntity.setUserId(order.getUserId());
 		orderRepository.save(orderEntity);
 	}
 	
 	@Override
     @Transactional
-	public List<Order> find() {
+	public List<Order> find(long id) {
 		 List<Order> list = new ArrayList<>();
-		 orderRepository.findAll().forEach(orderEntity->{
+		 orderRepository.findByUserId(id).forEach(orderEntity->{
 			 list.add(buildOrder(orderEntity));
 		 });
 		 return list;
@@ -69,7 +70,8 @@ public class OrderServicelmpl implements OrderService{
 				orderEntity.getName(),
 				orderEntity.getBookName(),
 				orderEntity.getPrice(),
-				orderEntity.getState()
+				orderEntity.getState(),
+				orderEntity.getUserId()
 				);
 		return order;
 	}
