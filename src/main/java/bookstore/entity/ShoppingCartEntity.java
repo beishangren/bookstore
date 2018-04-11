@@ -8,12 +8,13 @@ import javax.persistence.Lob;
 
 import bookstore.entity.AbstractEntity;
 @Entity
-public class GoodsProcessEntity extends AbstractEntity 
+public class ShoppingCartEntity extends AbstractEntity 
 {	
 	
 	private long userId;
 	private long goodsId;
-	
+	private String bookName;
+	private Integer bookPrice;
 	public long getUserId() {
 		return userId;
 	}
@@ -25,6 +26,18 @@ public class GoodsProcessEntity extends AbstractEntity
 	}
 	public void setGoodsId(long goodsId) {
 		this.goodsId = goodsId;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public Integer getBookPrice() {
+		return bookPrice;
+	}
+	public void setBookPrice(Integer bookPrice) {
+		this.bookPrice = bookPrice;
 	}
 	
 	

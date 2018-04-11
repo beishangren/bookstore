@@ -64,6 +64,14 @@ public class OrderServicelmpl implements OrderService{
 		orderRepository.save(orderEntity);
 	}
 	
+	@Override
+    @Transactional
+	public void confirm(long id) {
+		OrderEntity orderEntity=orderRepository.findOne(id);
+		orderEntity.setState("complete");
+		orderRepository.save(orderEntity);
+	}
+
 	public Order buildOrder(OrderEntity orderEntity) {
 		Order order=new Order(
 				orderEntity.getId(),

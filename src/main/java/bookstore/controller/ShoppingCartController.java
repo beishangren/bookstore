@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import bookstore.domain.Book;
-import bookstore.domain.Order;
+import bookstore.domain.ShoppingCart;
 import bookstore.domain.Users;
 import bookstore.service.BookService;
-import bookstore.service.OrderService;
 import bookstore.service.ShoppingCartService;
 import bookstore.service.UsersService;
 import java.util.List;
@@ -23,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/shop")
+public class ShoppingCartController {
 
   @Autowired
   private ShoppingCartService shoppingCartService;
@@ -35,46 +34,40 @@ public class OrderController {
   @Autowired
   private BookService bookService;
   
-  @Autowired
-  private OrderService orderService;
-  
   @ResponseBody
-  @RequestMapping(value="/buy",method=POST)
-	public String buy(HttpServletRequest request,@RequestParam("id") long id) {
+  @RequestMapping(value="/cart",method=POST)
+	public String addGoods(HttpServletRequest request,@RequestParam("id") long id) {
 	  Object sec =request.getSession(false).getAttribute("SPRING_SECURITY_CONTEXT");
 	  SecurityContext sc = (SecurityContext) sec;
-		Users user=usersService.findByUserName(sc.getAuthentication().getName());
-		Book book=bookService.findOne(id);
-		Order order=new Order();
-			order.setName(user.getUserName());
-			order.setBookName(book.getName());
-			order.setPrice(book.getPrice());
-			order.setState("buy");
-			order.setUserId(user.getId());;
-		orderService.save(order);	
-		return "success!";
+	  Users user=usersService.findByUserName(sc.getAuthentication().getName());
+	  Book book=bookService.findOne(id);
+	  ShoppingCart goodsProcess=new ShoppingCart();
+		goodsProcess.setUserId((int)user.getId());
+		goodsProcess.setGoodsId(id);
+		goodsProcess.setBookName(book.getName());
+		goodsProcess.setBookPrice(book.getPrice());
+		shoppingCartService.create(goodsProcess);
+		System.out.println("已添加到购物车");
+		return "success";
+		
 	}
   
   @ResponseBody
-  @RequestMapping(value="/findOrder",method=POST)
-	public List<Order> findBook(HttpServletRequest request) {
+  @RequestMapping(value="/findCart",method=POST)
+	public List<ShoppingCart> findCart(HttpServletRequest request) {
 	  Object sec =request.getSession(false).getAttribute("SPRING_SECURITY_CONTEXT");
 	  SecurityContext sc = (SecurityContext) sec;
-		Users user=usersService.findByUserName(sc.getAuthentication().getName());
-	  	List<Order> order=orderService.find(user.getId());
-		return order;
-	}
-  
-  @ResponseBody
-  @RequestMapping(value="/change",method=POST)
-	public void change(HttpServletRequest request,@RequestParam("id") long id) {
-	  	orderService.update(id);		
 
+		Users user=usersService.findByUserName(sc.getAuthentication().getName());
+		List<ShoppingCart> shoppingCart=shoppingCartService.findCart(user.getId());
+		
+		return shoppingCart;
 	}
   
-  @ResponseBody
-  @RequestMapping(value="/confirm",method=POST)
-	public void delete(HttpServletRequest request,@RequestParam("id") long id) {
-	  	orderService.confirm(id);		
+ 
+  @RequestMapping(value="/delete",method=POST)
+	public void del(HttpServletRequest request,@RequestParam("id") long id) {
+	  shoppingCartService.del(id);
+//	  return "success";
 	}
 }

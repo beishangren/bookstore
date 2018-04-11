@@ -82,12 +82,18 @@
 				$.each(data,function(index,item)
 				{
 					var tr=$("<tr></tr>"),
-					th1=$("<th>"+item.name+"</th>"),
-					th2=$("<th>"+item.price+"￥</th>"),
-					th3=$("<th><button id="+item.id+" onClick=buy(this)>购买</button></th>")
+					th1=$("<th>"+item.bookName+"</th>"),
+					th2=$("<th>"+item.bookPrice+"￥</th>"),
+					bt1=$("<button id="+item.goodsId+" onClick=buy(this)>购买</button>").addClass("btn btn-primary"),
+					bt2=$("<button id="+item.id+" onClick=del(this)>删除</button>").addClass("btn btn-danger"),
+					th3=$("<th></th>"),
+					th4=$("<th></th>")
+					th3.append(bt1);
+					th4.append(bt2);
 					tr.append(th1);
 					tr.append(th2);
 					tr.append(th3);
+					tr.append(th4);
 					$("#cart").append(tr);
 				});
 				
@@ -106,8 +112,8 @@
 					var state=null;
 					$.each(data,function(index,item)
 							{
-								var th4=$("<th><button disabled=true style=background:#CFCFCF id="+item.id+" onClick=buy(this)>确认收货</button></th>");
-
+								var th4=$("<th></th>");
+								var bt=$("<button  id="+item.id+" onClick=confirm(this)>确认收货</button>").addClass("btn btn-primary");
 								if(item.state=="buy"){
 									state="待发货"
 								}
@@ -115,14 +121,15 @@
 									state="已发货"
 								}
 								if(item.state=="complete"){
-									state="交易完成"
-									th4=$("<th><button style=background:skyblue id="+item.id+" onClick=buy(this)>确认收货</button></th>");
+									state="已签收"
+									
+									bt=$("<button  id="+item.id+" >已签收</button>").addClass("btn btn-info");
 								}
 								var tr=$("<tr></tr>"),
 								th1=$("<th>"+item.bookName+"</th>"),
 								th2=$("<th>"+item.price+"￥</th>"),
 								th3=$("<th>"+state+"</th>");
-								
+								th4.append(bt);
 								tr.append(th1);
 								tr.append(th2);
 								tr.append(th3);
@@ -130,8 +137,6 @@
 								$("#orderList").append(tr);
 							});
 				}
-				
-				
 			},error:function(XMLHttpRequest,jqXHR){
 				alert("erro");
 			}
@@ -139,7 +144,6 @@
 	});
 	
 	function buy(data){
-		alert("id是"+data.id);
  		 $.ajax('order/buy?id='+data.id,{
 			type:'POST', 
 			data:{}, 
@@ -148,9 +152,37 @@
 			success:function(data,XMLHttpRequest,jqXHR){
 			
 			},error:function(XMLHttpRequest,jqXHR){
-			
+				alert("购买成功");
 			}
 		});  
+	}
+	
+	function del(data){
+		alert("id是"+data.id);
+ 		 $.ajax('shop/delete?id='+data.id,{
+			type:'POST', 
+			data:{}, 
+			contentType:'application/json',
+			dataType:'json',
+			success:function(XMLHttpRequest,jqXHR){
+				
+			},error:function(XMLHttpRequest,jqXHR){
+				window.location.reload();
+			}
+		}); 
+	}
+ 		function confirm(data){
+ 			alert("id是"+data.id+"将要que'ren");
+ 	 		  $.ajax('order/confirm?id='+data.id,{
+ 				type:'POST', 
+ 				data:{}, 
+ 				contentType:'application/json',
+ 				dataType:'json',
+ 				success:function(XMLHttpRequest,jqXHR){
+ 				},error:function(XMLHttpRequest,jqXHR){
+ 					alert("已签收");
+ 				}
+ 			}); 
 	}
 	</script>
 </body>

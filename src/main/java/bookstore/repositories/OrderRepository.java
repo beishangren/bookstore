@@ -15,6 +15,8 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderEntity,
 
 	List<OrderEntity> findByUserId(long id);
 
+	void deleteById(long orderId);
+
 //	BookEntity find(long goodsId);
 
 

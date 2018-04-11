@@ -16,5 +16,7 @@ public interface OrderService {
 
 	void update(long id);
 
+	void confirm(long id);
+
 
 }

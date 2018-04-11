@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import bookstore.domain.Book;
 import bookstore.entity.BookEntity;
-import bookstore.entity.GoodsProcessEntity;
+import bookstore.entity.ShoppingCartEntity;
 import bookstore.entity.UsersEntity;
 
 //@Repository
-public interface GoodsProcessRepository extends PagingAndSortingRepository<GoodsProcessEntity, Long>, JpaSpecificationExecutor {
+public interface ShoppingCartRepository extends PagingAndSortingRepository<ShoppingCartEntity, Long>, JpaSpecificationExecutor {
 
 //	UsersEntity findByUserName(String name);
-	List<GoodsProcessEntity> findByUserId(long id);
+	List<ShoppingCartEntity> findByUserId(long id);
+
+	void deleteById(long id);
 
 
 

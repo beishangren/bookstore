@@ -5,16 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<h1>注册</h1>
-	用户名：
-	<input id="username" />
-	<br /> 密 码：
-	<input id="password" />
-	<br />
-	<button type="button" id="register">提交</button>
+		<div class="form-group">
+    		<label for="exampleInputEmail1">用户名</label>
+    		<input type="text" class="form-control" id="username">
+  		</div>
+		<div class="form-group">
+    		<label for="exampleInputEmail1">密码</label>
+    		<input type="password" class="form-control" id="password">
+  		</div>
+	<button type="submit" id="register" class="btn btn-default">提交</button>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$("#register").click(function() {
 			var name = $("#username").val();

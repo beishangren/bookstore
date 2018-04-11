@@ -49,16 +49,25 @@
 	</div>
 	
 	<div class="tab-pane fade" id="uploadBooks">
-		书名:<input type="text" id="name" /><br/>
-		价格:<input type="text" id="price" /><br/>
-		数量:<input type="text" id="number" /><br/>
+		<div class="form-group">
+    		<label for="exampleInputEmail1">书名</label>
+    		<input type="text" class="form-control" id="name">
+  		</div>
+		<div class="form-group">
+    		<label for="exampleInputEmail1">价格</label>
+    		<input type="text" class="form-control" id="price">
+  		</div>
+		<div class="form-group">
+    		<label for="exampleInputEmail1">数量</label>
+    		<input type="text" class="form-control" id="number">
+  		</div>
 		图片:<div style="width:30%;">
         	<div class="col-lg-8" id='myfile'>
             	<input type="file" name="myfile" data-path="1" data-ref="url2" class="col-sm-10 myfile" value="" /> 
                 <input type="hidden" name="url2" value="">
             </div>
          </div><br />
-       <button id="submit">上传</button>
+       <button id="submit" class="btn btn-primary">上传</button>
 	</div>
 	
 	<div class="tab-pane fade" id="income">
@@ -85,11 +94,25 @@
 				console.log(data);
 				$.each(data,function(index,item)
 				{
+					var bt=$("<button id="+item.id+" onClick=delivery(this)>已发货</button>").addClass("btn");
+						
+					if(item.state=="buy"){
+						state="待发货"
+						bt=$("<button id="+item.id+" onClick=delivery(this)>发货</button>").addClass("btn");
+					}
+					if(item.state=="delivery"){
+						state="已发货"
+					}
+					if(item.state=="complete"){
+						state="已签收"
+							
+					}
 					var tr=$("<tr></tr>"),
 					th1=$("<th>"+item.bookName+"</th>"),
 					th2=$("<th>"+item.price+"￥</th>"),
-					th3=$("<th>"+item.state+"</th>"),
-					th4=$("<th><button id="+item.id+" onClick=delivery(this)>发货</button></th>")
+					th3=$("<th>"+state+"</th>"),
+					th4=$("<th></th>")
+					th4.append(bt);
 					tr.append(th1);
 					tr.append(th2);
 					tr.append(th3);
